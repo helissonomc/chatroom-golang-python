@@ -2,9 +2,8 @@ FROM python:3.12-slim
 
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /app-python
-
+WORKDIR /python_project
 COPY ./python_project .
+
 RUN pip install poetry
-RUN poetry config virtualenvs.in-project true
-RUN poetry install
+RUN poetry install --no-interaction --no-ansi

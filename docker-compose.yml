@@ -9,5 +9,5 @@ services:
       ports:
         - "8081:8081"
       volumes:
-        - ./python_project:/app-python
+        - ./python_project:/python_project
       command: bash -c "bash"
