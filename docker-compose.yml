@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  fast-api-server:
+      stdin_open: true
+      build:
+        context: .
+        dockerfile: Dockerfile-python
+      ports:
+        - "8081:8081"
+      volumes:
+        - ./python_project:/app-python
+      command: bash -c "bash"
