@@ -11,3 +11,35 @@ services:
       volumes:
         - ./python_project:/python_project
       command: bash -c "bash"
+
+  go-server:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile-go
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./go_project:/go_project
+    command: bash -c "bash"
+    environment:
+      - DB_HOST=mysql-go
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=example
+      - DB_NAME=testdb
+    depends_on:
+      - mysql-go
+
+  mysql-go:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: testdb
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:

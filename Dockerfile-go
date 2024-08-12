@@ -1,0 +1,17 @@
+FROM golang:1.22
+
+# Set the Current Working Directory inside the container
+WORKDIR /go_project
+
+# Copy the source code into the container
+COPY ./go_project .
+
+
+# Download all dependencies
+RUN go mod tidy
+
+RUN apt update
+RUN apt install -y protobuf-compiler
+
+# Expose port 8080 to the outside world
+EXPOSE 8080
