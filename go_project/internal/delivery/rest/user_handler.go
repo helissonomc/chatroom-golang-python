@@ -6,7 +6,6 @@ import (
 	"chatroom/internal/domain"
 	"chatroom/internal/usecase"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -30,7 +29,6 @@ func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	fmt.Println("aaaaa", user)
 	if err := h.UserUsecase.CreateUser(&user); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -41,9 +39,7 @@ func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 
 func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	fmt.Println("aaaa", params)
 	id, err := strconv.Atoi(params["id"])
-	fmt.Println("bbbb", id)
 
 	if err != nil {
 		http.Error(w, "invalid ID", http.StatusBadRequest)
